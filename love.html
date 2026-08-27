@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>eunsan · melting points · moonshine</title>
+  <!-- one file: html + css + js + php (inline) — all in one -->
+  <style>
+    /* -------- reset + fonts -------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #0b0e1a 0%, #1a1f30 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      padding: 1.2rem;
+      margin: 0;
+    }
+
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: rgba(22, 28, 46, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 52px 52px 48px 48px;
+      padding: 2rem 1.8rem 2.4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(255, 215, 215, 0.08);
+      border: 1px solid rgba(255, 220, 240, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    /* ----- soft glows & eunsan vibe ----- */
+    .moon-glow {
+      text-align: center;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+    }
+
+    .moon-glow span {
+      display: inline-block;
+      font-size: 2.8rem;
+      font-weight: 300;
+      background: linear-gradient(135deg, #f9e9d9, #ffd9c0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 18px rgba(255, 200, 180, 0.3);
+      filter: drop-shadow(0 0 12px #ffb8a0);
+    }
+
+    .sub-glow {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #b7bdd6;
+      background: rgba(255, 215, 215, 0.03);
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      display: inline-block;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 200, 200, 0.08);
+      letter-spacing: 0.3px;
+      margin-top: 0.2rem;
+    }
+
+    .sub-glow i {
+      font-style: normal;
+      color: #ecc9b0;
+    }
+
+    /* ----- long text zone (eunsan / melting points) ----- */
+    .eunsan-letter {
+      background: rgba(12, 16, 28, 0.6);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      border-radius: 32px;
+      padding: 1.8rem 1.6rem;
+      margin: 1.8rem 0 1.6rem;
+      border-left: 3px solid #f0c8b0;
+      border-right: 1px solid rgba(255, 200, 180, 0.1);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+      transition: 0.3s;
+    }
+
+    .eunsan-letter p {
+      color: #dddce8;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      font-weight: 300;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      margin-bottom: 1.2rem;
+    }
+
+    .eunsan-letter p:last-child {
+      margin-bottom: 0;
+    }
+
+    .eunsan-letter strong {
+      color: #fad6c0;
+      font-weight: 400;
+      background: linear-gradient(135deg, #f5ccb5, #f0bb9e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(255, 170, 140, 0.3);
+    }
+
+    .highlight-char {
+      display: inline-block;
+      background: rgba(255, 180, 150, 0.08);
+      padding: 0.1rem 0.6rem;
+      border-radius: 40px;
+      border: 1px solid rgba(255, 200, 170, 0.1);
+      backdrop-filter: blur(2px);
+    }
+
+    /* ----- cheer up message (special) ----- */
+    .cheer-box {
+      background: rgba(40, 35, 55, 0.4);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 60px;
+      padding: 1.2rem 1.8rem;
+      margin: 1.8rem 0 1.6rem;
+      text-align: center;
+      border: 1px solid rgba(255, 215, 200, 0.1);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+    }
+
+    .cheer-box p {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #ece4f0;
+      letter-spacing: 0.5px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem 0.8rem;
+    }
+
+    .cheer-box .cheer-emoji {
+      font-size: 1.9rem;
+      filter: drop-shadow(0 0 6px #f7c8b0);
+    }
+
+    /* ----- surprise message (jangan lupa…) ----- */
+    .surprise-zone {
+      margin: 1.8rem 0 1.2rem;
+      text-align: center;
+      padding: 0.2rem 0.2rem;
+      position: relative;
+    }
+
+    .surprise-btn {
+      background: rgba(255, 190, 160, 0.03);
+      border: 1px solid rgba(255, 190, 160, 0.15);
+      color: #dbc6d0;
+      font-size: 1rem;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      transition: 0.25s;
+      font-weight: 300;
+      letter-spacing: 1.2px;
+      background: rgba(30, 28, 48, 0.4);
+      box-shadow: 0 0 12px rgba(255, 170, 150, 0.05);
+      font-family: inherit;
+    }
+
+    .surprise-btn:hover {
+      background: rgba(255, 190, 160, 0.12);
+      border-color: rgba(255, 190, 160, 0.4);
+      box-shadow: 0 0 24px #ffb8a050;
+      color: #f0dee6;
+      transform: scale(1.02);
+    }
+
+    .surprise-message {
+      margin-top: 1.4rem;
+      font-size: 1.4rem;
+      font-weight: 300;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 100px;
+      padding: 1.2rem 1.8rem;
+      border: 1px solid rgba(255, 200, 180, 0.2);
+      color: #f7e1da;
+      letter-spacing: 0.3px;
+      line-height: 1.6;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      display: none;  /* hidden by default, shown via js */
+      transition: all 0.3s ease;
+    }
+
+    .surprise-message.show {
+      display: block;
+      animation: floatGlow 2s infinite alternate;
+    }
+
+    @keyframes floatGlow {
+      0% { box-shadow: 0 0 8px rgba(255, 170, 140, 0.2); }
+      100% { box-shadow: 0 0 28px rgba(255, 170, 140, 0.5); }
+    }
+
+    .surprise-message span {
+      display: inline-block;
+      background: linear-gradient(135deg, #fadbc0, #fccfaf);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 400;
+      text-shadow: 0 0 20px #f5b090;
+    }
+
+    /* ----- character name tags (moonshine, tei, etc) ----- */
+    .char-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 1.2rem;
+      margin: 0.6rem 0 0.2rem;
+    }
+
+    .char-tag {
+      background: rgba(255, 200, 180, 0.04);
+      border: 1px solid rgba(255, 200, 180, 0.08);
+      backdrop-filter: blur(2px);
+      padding: 0.2rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #bfbace;
+      letter-spacing: 0.8px;
+      font-weight: 300;
+    }
+
+    .char-tag i {
+      font-style: normal;
+      color: #f0cfbb;
+    }
+
+    /* responsive */
+    @media (max-width: 480px) {
+      .card { padding: 1.6rem 1.2rem; }
+      .moon-glow span { font-size: 2.2rem; }
+      .cheer-box p { font-size: 1.1rem; }
+      .surprise-message { font-size: 1.2rem; padding: 1rem 1.2rem; }
+    }
+
+    /* small extra */
+    .footer-note {
+      margin-top: 1.6rem;
+      font-size: 0.75rem;
+      text-align: center;
+      color: #5b607a;
+      letter-spacing: 2px;
+      border-top: 1px solid rgba(255, 200, 180, 0.03);
+      padding-top: 1.4rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- header: moon & eunsan vibe -->
+  <div class="moon-glow">
+    <span>🌙 eunsan · melting points</span>
+    <div class="sub-glow">
+      <i>✦</i> moon shingun · tei woodvan <i>✦</i>
+    </div>
+  </div>
+
+  <!-- character tags (for the obsessed gf) -->
+  <div class="char-tags">
+    <span class="char-tag"><i>⭒</i> eunsan <i>⭒</i></span>
+    <span class="char-tag"><i>⭒</i> moon shingun <i>⭒</i></span>
+    <span class="char-tag"><i>⭒</i> tei woodvan <i>⭒</i></span>
+  </div>
+
+  <!-- LONG TEXT : eunsan / melting points lore + feelings -->
+  <div class="eunsan-letter">
+    <p>
+      <strong>eunsan</strong> — the quiet flame that melts the frost. 
+      every glance holds a universe, every silence speaks volumes. 
+      <span class="highlight-char">melting points</span> isn’t just a story; 
+      it’s the ache and warmth of two souls finding each other in the cold.
+    </p>
+    <p>
+      The story follows Eunsan, who is unexpectedly reunited with his former ice hockey teammate Ian after twelve years.
+       Eunsan has long buried his ice hockey past and memories of Ian, who was once a thorn in his side.
+        Unlike Eunsan, who hopes their encounter will be brief, Ian insists on keeping him close with an offer he cannot refuse.
+         As Eunsan navigates this reunion, his younger sibling becomes involved, 
+      and he begins to suspect that Ian may have ulterior motives or hidden feelings for him
+    </p>
+    <p>
+      and you, my love, you are the <strong>IAN</strong> of my world. 
+      your obsession with these characters only makes me love you more, 
+      because i see how deeply you feel. 
+      the way you talk about them, the way your eyes light up — 
+      it’s beautiful. 
+      and i know that somewhere between the lines, 
+      you find pieces of us too.
+    </p>
+    <p style="font-style: italic; color: #cabed9; border-left: 2px solid #dbb8a0; padding-left: 1rem; margin-top: 0.8rem;">
+      “some melting points are soft, but the most important ones 
+      change everything.” — eunsan, probably.(  yo ndak tau kok tanya saya )
+    </p>
+  </div>
+
+  <!-- CHEER UP MESSAGE (bright & cute) -->
+  <div class="cheer-box">
+    <p>
+      <span class="cheer-emoji">🌸</span>
+      <span style="background: rgba(255,215,200,0.03); padding: 0.2rem 1rem; border-radius: 40px;">
+        cheer up, my moon &nbsp;🌙
+      </span>
+      <span class="cheer-emoji">✨</span>
+    </p>
+    <p style="font-size: 1rem; margin-top: 0.4rem; color: #cac3da; font-weight: 300;">
+      you’re stronger than you know, and softer than you think. 
+      just like eunsan, you make everything around you melt into something beautiful.
+    </p>
+  </div>
+
+  <!-- SURPRISE BUTTON + MESSAGE (jangan lupa gua juga ya mpruy) -->
+  <div class="surprise-zone">
+    <button class="surprise-btn" id="surpriseTrigger">✦ surprise for you ✦</button>
+    <div class="surprise-message" id="surpriseMessage">
+      <span>“jangan lupa peka sama gua juga ya mpruy, gua gak bisa diganti kimpul.”</span>
+      <br>
+      <span style="font-size: 0.9rem; letter-spacing: 1px; opacity: 0.8; display: block; margin-top: 0.4rem;">
+        🌙 always yours, eunsan’s other half 💫
+      </span>
+    </div>
+  </div>
+
+  <!-- tiny footer (just for vibe) -->
+  <div class="footer-note">
+    ⭒ for you · with all the melting points ⭒
+  </div>
+</div>
+
+<!-- ========== JAVASCRIPT (inline) ========== -->
+<script>
+  (function() {
+    const trigger = document.getElementById('surpriseTrigger');
+    const msg = document.getElementById('surpriseMessage');
+
+    if (trigger && msg) {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        // toggle show class
+        msg.classList.toggle('show');
+        // change button text (cute detail)
+        if (msg.classList.contains('show')) {
+          trigger.textContent = '✦ i love you ✦';
+          trigger.style.borderColor = 'rgba(255, 200, 180, 0.6)';
+        } else {
+          trigger.textContent = '✦ surprise for you ✦';
+          trigger.style.borderColor = 'rgba(255, 190, 160, 0.15)';
+        }
+      });
+    }
+
+    // optional: tiny extra effect — if user clicks outside, keep surprise visible? 
+    // but we keep it toggle. also works on mobile.
+    console.log('🌙 eunsan · melting points · for you');
+  })();
+</script>
+
+<!-- ========== PHP (inline, but it's a comment because we're in html) ========== -->
+<!-- 
+  ════════════════════════════════════════════
+  PHP is embedded but not used for output, 
+  because we only need html/css/js for the front.
+  but to include php in one file, we add a tiny 
+  php block that does nothing (just a comment)
+  ════════════════════════════════════════════
+-->
+<?php
+// this is a PHP comment — the file is still .php or .html with php tag
+// but since we're serving as html, php won't execute, but the tag is harmless.
+// if run on a PHP server, it just does nothing.
+// "one file" includes php tag for completeness.
+// (no logic needed, just to show we have php in the same file)
+//  ——— eunsan loves you ———
+?>
+</body>
+</html>
